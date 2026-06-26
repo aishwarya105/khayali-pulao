@@ -1,0 +1,82 @@
+import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
+import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
+
+import { CaptureScreen } from './src/screens/CaptureScreen';
+import { InboxScreen } from './src/screens/InboxScreen';
+import { SettingsScreen } from './src/screens/SettingsScreen';
+import { AppProvider, useApp } from './src/store/AppContext';
+import { colors, spacing } from './src/theme';
+
+type Tab = 'capture' | 'inbox' | 'settings';
+
+const TABS: { key: Tab; label: string; icon: string }[] = [
+  { key: 'capture', label: 'Capture', icon: '🎙' },
+  { key: 'inbox', label: 'Inbox', icon: '✦' },
+  { key: 'settings', label: 'Settings', icon: '⚙' },
+];
+
+function Root() {
+  const { ready } = useApp();
+  const [tab, setTab] = useState<Tab>('capture');
+
+  if (!ready) {
+    return (
+      <View style={[styles.flex, styles.center]}>
+        <ActivityIndicator color={colors.accent} size="large" />
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.flex}>
+      <View style={styles.flex}>
+        {tab === 'capture' ? <CaptureScreen /> : null}
+        {tab === 'inbox' ? <InboxScreen /> : null}
+        {tab === 'settings' ? <SettingsScreen /> : null}
+      </View>
+
+      <View style={styles.tabBar}>
+        {TABS.map((t) => {
+          const active = tab === t.key;
+          return (
+            <Pressable key={t.key} style={styles.tab} onPress={() => setTab(t.key)}>
+              <Text style={[styles.tabIcon, active && styles.tabActive]}>{t.icon}</Text>
+              <Text style={[styles.tabLabel, active && styles.tabActive]}>{t.label}</Text>
+            </Pressable>
+          );
+        })}
+      </View>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <AppProvider>
+      <SafeAreaView style={styles.safe}>
+        <StatusBar style="light" />
+        <Root />
+      </SafeAreaView>
+    </AppProvider>
+  );
+}
+
+const styles = StyleSheet.create({
+  safe: { flex: 1, backgroundColor: colors.bg },
+  flex: { flex: 1, backgroundColor: colors.bg },
+  center: { alignItems: 'center', justifyContent: 'center' },
+  tabBar: {
+    flexDirection: 'row',
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+    backgroundColor: colors.surface,
+    paddingTop: spacing.sm,
+    paddingBottom: spacing.lg,
+  },
+  tab: { flex: 1, alignItems: 'center', gap: 2 },
+  tabIcon: { fontSize: 18, opacity: 0.6 },
+  tabLabel: { color: colors.textFaint, fontSize: 11, fontWeight: '600' },
+  tabActive: { color: colors.accent, opacity: 1 },
+});

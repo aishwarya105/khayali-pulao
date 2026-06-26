@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Khayali Pulao",
+    "slug": "khayali-pulao",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "khayalipulao",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0E1116"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.khayalipulao.app"
+    },
+    "android": {
+      "package": "com.khayalipulao.app"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
