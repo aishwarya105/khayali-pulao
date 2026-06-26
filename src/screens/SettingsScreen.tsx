@@ -20,7 +20,7 @@ const MODEL_OPTIONS = [
   { id: 'claude-haiku-4-5-20251001', label: 'Haiku 4.5 — fastest, cheapest' },
 ];
 
-export function SettingsScreen() {
+export function SettingsScreen({ embedded = false }: { embedded?: boolean } = {}) {
   const { settings, setApiKey, setModel, clearAll, items, thoughts } = useApp();
   const [draftKey, setDraftKey] = useState('');
   const [saved, setSaved] = useState(false);
@@ -56,7 +56,7 @@ export function SettingsScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.scroll}>
-      <Text style={styles.title}>Settings</Text>
+      {embedded ? null : <Text style={styles.title}>Settings</Text>}
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Claude API key</Text>

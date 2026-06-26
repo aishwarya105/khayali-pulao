@@ -20,6 +20,14 @@
     },
     "web": {
       "bundler": "metro"
-    }
+    },
+    "plugins": [
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "Khayali Pulao adds the times you schedule to your calendar."
+        }
+      ]
+    ]
   }
 }

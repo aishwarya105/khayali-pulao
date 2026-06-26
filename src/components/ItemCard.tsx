@@ -1,14 +1,16 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { formatSlot, isPast } from '../schedule';
 import { colors, spacing, typeMeta } from '../theme';
 import { SynthItem } from '../types';
 import { relativeTime } from '../util';
 
 interface Props {
   item: SynthItem;
-  onToggle: (id: string) => void;
-  onDelete: (id: string) => void;
+  onToggle?: (id: string) => void;
+  onDelete?: (id: string) => void;
+  onSchedule?: (item: SynthItem) => void;
 }
 
 const priorityColor: Record<string, string> = {
@@ -17,16 +19,17 @@ const priorityColor: Record<string, string> = {
   low: colors.textFaint,
 };
 
-export function ItemCard({ item, onToggle, onDelete }: Props) {
+export function ItemCard({ item, onToggle, onDelete, onSchedule }: Props) {
   const meta = typeMeta[item.type];
   const isTodo = item.type === 'todo';
   const done = !!item.done;
+  const schedulable = item.type === 'todo' || item.type === 'event';
 
   return (
     <View style={[styles.card, { borderLeftColor: meta.color }]}>
       <View style={styles.headerRow}>
         <View style={styles.typeRow}>
-          {isTodo ? (
+          {isTodo && onToggle ? (
             <Pressable
               onPress={() => onToggle(item.id)}
               hitSlop={8}
@@ -46,9 +49,11 @@ export function ItemCard({ item, onToggle, onDelete }: Props) {
             </Text>
           ) : null}
         </View>
-        <Pressable onPress={() => onDelete(item.id)} hitSlop={8}>
-          <Text style={styles.delete}>✕</Text>
-        </Pressable>
+        {onDelete ? (
+          <Pressable onPress={() => onDelete(item.id)} hitSlop={8}>
+            <Text style={styles.delete}>✕</Text>
+          </Pressable>
+        ) : null}
       </View>
 
       <Text style={[styles.title, done && styles.struck]}>{item.title}</Text>
@@ -58,16 +63,9 @@ export function ItemCard({ item, onToggle, onDelete }: Props) {
         </Text>
       ) : null}
 
-      {item.type === 'event' && (item.suggestedDate || item.durationMinutes) ? (
-        <Text style={styles.meta}>
-          {item.suggestedDate ? new Date(item.suggestedDate).toLocaleString() : 'No time set'}
-          {item.durationMinutes ? ` · ${item.durationMinutes} min` : ''}
-        </Text>
-      ) : null}
-
       <View style={styles.footerRow}>
         <View style={styles.tags}>
-          {item.tags.slice(0, 4).map((t) => (
+          {item.tags.slice(0, 3).map((t) => (
             <Text key={t} style={styles.tag}>
               #{t}
             </Text>
@@ -75,6 +73,23 @@ export function ItemCard({ item, onToggle, onDelete }: Props) {
         </View>
         <Text style={styles.time}>{relativeTime(item.createdAt)}</Text>
       </View>
+
+      {schedulable && onSchedule ? (
+        <Pressable
+          style={[styles.scheduleBtn, !!item.scheduledFor && styles.scheduleBtnSet]}
+          onPress={() => onSchedule(item)}
+        >
+          <Text
+            style={[
+              styles.scheduleText,
+              !!item.scheduledFor && styles.scheduleTextSet,
+              item.scheduledFor && isPast(item.scheduledFor) && !done ? styles.schedulePast : null,
+            ]}
+          >
+            {item.scheduledFor ? `◷ ${formatSlot(item.scheduledFor)}` : '◷ Make time for it'}
+          </Text>
+        </Pressable>
+      ) : null}
     </View>
   );
 }
@@ -96,12 +111,7 @@ const styles = StyleSheet.create({
   typeRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   typeEmoji: { fontSize: 14, fontWeight: '700' },
   typeLabel: { fontSize: 12, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 0.5 },
-  priority: {
-    fontSize: 11,
-    fontWeight: '600',
-    textTransform: 'uppercase',
-    marginLeft: spacing.xs,
-  },
+  priority: { fontSize: 11, fontWeight: '600', textTransform: 'uppercase', marginLeft: spacing.xs },
   delete: { color: colors.textFaint, fontSize: 14, fontWeight: '600' },
   check: {
     width: 20,
@@ -117,7 +127,6 @@ const styles = StyleSheet.create({
   title: { color: colors.text, fontSize: 16, fontWeight: '600', marginBottom: 2 },
   body: { color: colors.textDim, fontSize: 14, lineHeight: 20, marginTop: 2 },
   struck: { textDecorationLine: 'line-through', color: colors.textFaint },
-  meta: { color: colors.textDim, fontSize: 13, marginTop: spacing.sm },
   footerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -127,4 +136,16 @@ const styles = StyleSheet.create({
   tags: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, flex: 1 },
   tag: { color: colors.textFaint, fontSize: 12 },
   time: { color: colors.textFaint, fontSize: 12 },
+  scheduleBtn: {
+    marginTop: spacing.md,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
+    borderRadius: 10,
+    backgroundColor: colors.surfaceAlt,
+    alignSelf: 'flex-start',
+  },
+  scheduleBtnSet: { backgroundColor: colors.accentSoft },
+  scheduleText: { color: colors.textDim, fontSize: 13, fontWeight: '600' },
+  scheduleTextSet: { color: colors.accent },
+  schedulePast: { color: colors.danger },
 });

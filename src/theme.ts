@@ -12,6 +12,7 @@ export const colors = {
   accentSoft: '#2A3550',
   danger: '#FF6B6B',
   success: '#4ADE9B',
+  warning: '#F5A623',
 };
 
 export const typeMeta: Record<ItemType, { label: string; emoji: string; color: string }> = {

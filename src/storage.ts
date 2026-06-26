@@ -1,9 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { CapturedThought, SynthItem } from './types';
+import { CapturedThought, ChatMessage, ProfileFact, Suggestion, SynthItem } from './types';
 
-const THOUGHTS_KEY = 'kp.thoughts.v1';
-const ITEMS_KEY = 'kp.items.v1';
+const KEYS = {
+  thoughts: 'kp.thoughts.v1',
+  items: 'kp.items.v1',
+  profile: 'kp.profile.v1',
+  suggestions: 'kp.suggestions.v1',
+  chat: 'kp.chat.v1',
+} as const;
 
 async function readJson<T>(key: string, fallback: T): Promise<T> {
   try {
@@ -15,18 +20,25 @@ async function readJson<T>(key: string, fallback: T): Promise<T> {
   }
 }
 
-async function writeJson(key: string, value: unknown): Promise<void> {
-  await AsyncStorage.setItem(key, JSON.stringify(value));
+function writeJson(key: string, value: unknown): Promise<void> {
+  return AsyncStorage.setItem(key, JSON.stringify(value));
 }
 
 export const storage = {
-  loadThoughts: () => readJson<CapturedThought[]>(THOUGHTS_KEY, []),
-  saveThoughts: (thoughts: CapturedThought[]) => writeJson(THOUGHTS_KEY, thoughts),
+  loadThoughts: () => readJson<CapturedThought[]>(KEYS.thoughts, []),
+  saveThoughts: (v: CapturedThought[]) => writeJson(KEYS.thoughts, v),
 
-  loadItems: () => readJson<SynthItem[]>(ITEMS_KEY, []),
-  saveItems: (items: SynthItem[]) => writeJson(ITEMS_KEY, items),
+  loadItems: () => readJson<SynthItem[]>(KEYS.items, []),
+  saveItems: (v: SynthItem[]) => writeJson(KEYS.items, v),
 
-  async clearAll(): Promise<void> {
-    await AsyncStorage.multiRemove([THOUGHTS_KEY, ITEMS_KEY]);
-  },
+  loadProfile: () => readJson<ProfileFact[]>(KEYS.profile, []),
+  saveProfile: (v: ProfileFact[]) => writeJson(KEYS.profile, v),
+
+  loadSuggestions: () => readJson<Suggestion[]>(KEYS.suggestions, []),
+  saveSuggestions: (v: Suggestion[]) => writeJson(KEYS.suggestions, v),
+
+  loadChat: () => readJson<ChatMessage[]>(KEYS.chat, []),
+  saveChat: (v: ChatMessage[]) => writeJson(KEYS.chat, v),
+
+  clearAll: () => AsyncStorage.multiRemove(Object.values(KEYS)),
 };

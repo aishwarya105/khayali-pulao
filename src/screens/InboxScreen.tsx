@@ -2,9 +2,10 @@ import React, { useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { ItemCard } from '../components/ItemCard';
+import { ScheduleSheet } from '../components/ScheduleSheet';
 import { useApp } from '../store/AppContext';
 import { colors, spacing, typeMeta } from '../theme';
-import { ItemType } from '../types';
+import { ItemType, SynthItem } from '../types';
 
 type Filter = 'all' | ItemType | 'open';
 
@@ -18,8 +19,9 @@ const FILTERS: { key: Filter; label: string }[] = [
 ];
 
 export function InboxScreen() {
-  const { items, toggleTodo, deleteItem } = useApp();
+  const { items, toggleTodo, deleteItem, scheduleItem } = useApp();
   const [filter, setFilter] = useState<Filter>('all');
+  const [scheduleTarget, setScheduleTarget] = useState<SynthItem | null>(null);
 
   const filtered = useMemo(() => {
     switch (filter) {
@@ -32,6 +34,8 @@ export function InboxScreen() {
     }
   }, [items, filter]);
 
+  // Keep the sheet's item in sync with the store so it reflects new times.
+  const liveTarget = scheduleTarget ? items.find((i) => i.id === scheduleTarget.id) ?? null : null;
   const openTodos = items.filter((i) => i.type === 'todo' && !i.done).length;
 
   return (
@@ -44,20 +48,14 @@ export function InboxScreen() {
         </Text>
       </View>
 
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.filters}
-      >
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filters}>
         {FILTERS.map((f) => (
           <Pressable
             key={f.key}
             onPress={() => setFilter(f.key)}
             style={[styles.chip, filter === f.key && styles.chipActive]}
           >
-            <Text style={[styles.chipText, filter === f.key && styles.chipTextActive]}>
-              {f.label}
-            </Text>
+            <Text style={[styles.chipText, filter === f.key && styles.chipTextActive]}>{f.label}</Text>
           </Pressable>
         ))}
       </ScrollView>
@@ -65,7 +63,13 @@ export function InboxScreen() {
       <ScrollView contentContainerStyle={styles.list}>
         {filtered.length ? (
           filtered.map((it) => (
-            <ItemCard key={it.id} item={it} onToggle={toggleTodo} onDelete={deleteItem} />
+            <ItemCard
+              key={it.id}
+              item={it}
+              onToggle={toggleTodo}
+              onDelete={deleteItem}
+              onSchedule={setScheduleTarget}
+            />
           ))
         ) : (
           <View style={styles.empty}>
@@ -77,6 +81,8 @@ export function InboxScreen() {
           </View>
         )}
       </ScrollView>
+
+      <ScheduleSheet item={liveTarget} onClose={() => setScheduleTarget(null)} onSchedule={scheduleItem} />
     </View>
   );
 }

@@ -1,20 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native';
+import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import { CaptureScreen } from './src/screens/CaptureScreen';
 import { InboxScreen } from './src/screens/InboxScreen';
-import { SettingsScreen } from './src/screens/SettingsScreen';
+import { PartnerScreen } from './src/screens/PartnerScreen';
+import { TodayScreen } from './src/screens/TodayScreen';
+import { YouScreen } from './src/screens/YouScreen';
 import { AppProvider, useApp } from './src/store/AppContext';
 import { colors, spacing } from './src/theme';
 
-type Tab = 'capture' | 'inbox' | 'settings';
+type Tab = 'capture' | 'today' | 'inbox' | 'partner' | 'you';
 
 const TABS: { key: Tab; label: string; icon: string }[] = [
   { key: 'capture', label: 'Capture', icon: '🎙' },
+  { key: 'today', label: 'Today', icon: '◷' },
   { key: 'inbox', label: 'Inbox', icon: '✦' },
-  { key: 'settings', label: 'Settings', icon: '⚙' },
+  { key: 'partner', label: 'Partner', icon: '✺' },
+  { key: 'you', label: 'You', icon: '☺' },
 ];
 
 function Root() {
@@ -33,8 +36,10 @@ function Root() {
     <View style={styles.flex}>
       <View style={styles.flex}>
         {tab === 'capture' ? <CaptureScreen /> : null}
+        {tab === 'today' ? <TodayScreen /> : null}
         {tab === 'inbox' ? <InboxScreen /> : null}
-        {tab === 'settings' ? <SettingsScreen /> : null}
+        {tab === 'partner' ? <PartnerScreen /> : null}
+        {tab === 'you' ? <YouScreen /> : null}
       </View>
 
       <View style={styles.tabBar}>
@@ -76,7 +81,7 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.lg,
   },
   tab: { flex: 1, alignItems: 'center', gap: 2 },
-  tabIcon: { fontSize: 18, opacity: 0.6 },
+  tabIcon: { fontSize: 18, opacity: 0.6, color: colors.textFaint },
   tabLabel: { color: colors.textFaint, fontSize: 11, fontWeight: '600' },
   tabActive: { color: colors.accent, opacity: 1 },
 });
