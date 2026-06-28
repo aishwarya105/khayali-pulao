@@ -5,7 +5,7 @@ import { ItemCard } from '../components/ItemCard';
 import { ScheduleSheet } from '../components/ScheduleSheet';
 import { formatSlot, isToday } from '../schedule';
 import { useApp } from '../store/AppContext';
-import { cardShadow, colors, fonts, spacing } from '../theme';
+import { cardShadow, colors, display, eyebrow, spacing } from '../theme';
 import { LoadLevel, SynthItem } from '../types';
 
 const loadMeta: Record<LoadLevel, { label: string; color: string }> = {
@@ -155,18 +155,18 @@ function getGreeting(): string {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   scroll: { padding: spacing.xl, paddingBottom: spacing.xxl * 2 },
-  greeting: { color: colors.text, fontSize: 30, fontWeight: '600', letterSpacing: -0.3, fontFamily: fonts.serif },
+  greeting: { ...display, fontSize: 36, lineHeight: 38 },
   date: { color: colors.textDim, fontSize: 15, marginTop: 2, marginBottom: spacing.xl },
   coachCard: {
     backgroundColor: colors.surface,
-    borderRadius: 18,
+    borderRadius: 14,
     borderWidth: 1,
     borderColor: colors.border,
-    padding: spacing.lg,
+    padding: spacing.xl,
     ...cardShadow,
   },
   coachHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  coachTitle: { color: colors.text, fontSize: 17, fontWeight: '700' },
+  coachTitle: { ...display, fontSize: 20 },
   coachBtn: {
     backgroundColor: colors.accent,
     paddingVertical: spacing.sm,
@@ -175,42 +175,37 @@ const styles = StyleSheet.create({
     minWidth: 110,
     alignItems: 'center',
   },
-  coachBtnText: { color: colors.accentText, fontWeight: '700', fontSize: 13 },
+  coachBtnText: { color: colors.accentText, fontWeight: '800', fontSize: 13 },
   coachEmpty: { color: colors.textDim, fontSize: 14, lineHeight: 21, marginTop: spacing.md },
-  loadPill: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginTop: spacing.md },
-  loadDot: { width: 9, height: 9, borderRadius: 5 },
-  loadLabel: { fontSize: 13, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 0.5 },
-  coachSummary: { color: colors.text, fontSize: 15, lineHeight: 22, marginTop: spacing.md },
-  coachBlock: { marginTop: spacing.lg },
-  coachBlockLabel: {
-    color: colors.textFaint,
-    fontSize: 11,
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: 0.6,
-    marginBottom: spacing.sm,
+  loadPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginTop: spacing.lg,
+    alignSelf: 'flex-start',
+    paddingVertical: 6,
+    paddingHorizontal: spacing.md,
+    borderRadius: 999,
+    backgroundColor: colors.surfaceAlt,
   },
+  loadDot: { width: 9, height: 9, borderRadius: 5 },
+  loadLabel: { ...eyebrow, fontSize: 12 },
+  coachSummary: { color: colors.text, fontSize: 16, lineHeight: 24, marginTop: spacing.md, fontWeight: '500' },
+  coachBlock: { marginTop: spacing.lg },
+  coachBlockLabel: { ...eyebrow, color: colors.textFaint, marginBottom: spacing.sm },
   focusItem: { color: colors.text, fontSize: 14, lineHeight: 22 },
   considerItem: { color: colors.textDim, fontSize: 14, lineHeight: 22 },
   considerWhy: { fontStyle: 'italic', color: colors.textFaint },
   encouragement: {
     color: colors.accent,
-    fontSize: 14,
-    fontStyle: 'italic',
-    marginTop: spacing.lg,
-    lineHeight: 21,
-  },
-  sectionLabel: {
-    color: colors.textDim,
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    marginTop: spacing.xxl,
-    marginBottom: spacing.md,
+    marginTop: spacing.lg,
+    lineHeight: 22,
   },
+  sectionLabel: { ...eyebrow, color: colors.textFaint, marginTop: spacing.xxl, marginBottom: spacing.md },
   agendaRow: { flexDirection: 'row', gap: spacing.sm },
-  agendaTime: { color: colors.accent, fontSize: 12, fontWeight: '700', width: 58, paddingTop: spacing.lg },
+  agendaTime: { ...eyebrow, color: colors.accent, fontSize: 11, width: 58, paddingTop: spacing.lg },
   agendaCard: { flex: 1 },
   emptyText: { color: colors.textDim, fontSize: 14, lineHeight: 21 },
 });

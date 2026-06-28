@@ -4,7 +4,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SuggestionCard } from '../components/SuggestionCard';
 import { useApp } from '../store/AppContext';
 import { SettingsScreen } from './SettingsScreen';
-import { colors, fonts, spacing } from '../theme';
+import { colors, display, eyebrow, spacing } from '../theme';
 import { FactCategory } from '../types';
 
 type Pane = 'about' | 'suggestions' | 'settings';
@@ -122,7 +122,7 @@ export function YouScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   header: { paddingHorizontal: spacing.xl, paddingTop: spacing.lg, paddingBottom: spacing.sm },
-  title: { color: colors.text, fontSize: 28, fontWeight: '600', fontFamily: fonts.serif },
+  title: { ...display, fontSize: 34, textTransform: 'uppercase' },
   subtitle: { color: colors.textDim, fontSize: 14, marginTop: 2 },
   segment: {
     flexDirection: 'row',
@@ -134,20 +134,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
   },
-  segBtn: { flex: 1, paddingVertical: spacing.sm, borderRadius: 9, alignItems: 'center' },
-  segBtnActive: { backgroundColor: colors.accentSoft },
-  segText: { color: colors.textDim, fontSize: 14, fontWeight: '600' },
-  segTextActive: { color: colors.accent },
+  segBtn: { flex: 1, paddingVertical: spacing.sm, borderRadius: 8, alignItems: 'center' },
+  segBtnActive: { backgroundColor: colors.block },
+  segText: { ...eyebrow, fontSize: 11, color: colors.textDim },
+  segTextActive: { color: colors.textOnBlock },
   scroll: { padding: spacing.xl, paddingTop: spacing.sm, paddingBottom: spacing.xxl * 2 },
   group: { marginBottom: spacing.xl },
-  groupLabel: {
-    color: colors.textFaint,
-    fontSize: 11,
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: 0.6,
-    marginBottom: spacing.sm,
-  },
+  groupLabel: { ...eyebrow, color: colors.textFaint, marginBottom: spacing.sm },
   factRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',

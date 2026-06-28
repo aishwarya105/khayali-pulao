@@ -82,6 +82,6 @@ const styles = StyleSheet.create({
   },
   tab: { flex: 1, alignItems: 'center', gap: 3 },
   tabIcon: { fontSize: 18, color: colors.textFaint },
-  tabLabel: { color: colors.textFaint, fontSize: 11, fontWeight: '600' },
+  tabLabel: { color: colors.textFaint, fontSize: 9.5, fontWeight: '800', letterSpacing: 0.8, textTransform: 'uppercase' },
   tabActive: { color: colors.accent },
 });

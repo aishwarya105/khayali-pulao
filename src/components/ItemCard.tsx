@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   checkDone: { backgroundColor: colors.accent },
   checkMark: { color: colors.accentText, fontSize: 13, fontWeight: '900', lineHeight: 16 },
-  title: { color: colors.text, fontSize: 16, fontWeight: '600', marginBottom: 2 },
+  title: { color: colors.text, fontSize: 16, fontWeight: '700', letterSpacing: -0.2, marginBottom: 2 },
   body: { color: colors.textDim, fontSize: 14, lineHeight: 20, marginTop: 2 },
   struck: { textDecorationLine: 'line-through', color: colors.textFaint },
   footerRow: {

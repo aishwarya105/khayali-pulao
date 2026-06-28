@@ -15,7 +15,7 @@ import {
 import { ItemCard } from '../components/ItemCard';
 import { SuggestionCard } from '../components/SuggestionCard';
 import { useApp } from '../store/AppContext';
-import { cardShadow, colors, fonts, spacing, typeMeta } from '../theme';
+import { cardShadow, colors, display, eyebrow, spacing, typeMeta } from '../theme';
 import { CaptureResult, SynthItem } from '../types';
 import { useVoiceCapture } from '../voice/useVoiceCapture';
 
@@ -204,7 +204,7 @@ export function CaptureScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   scroll: { padding: spacing.xl, paddingBottom: spacing.xxl * 2 },
-  brand: { color: colors.text, fontSize: 30, fontWeight: '600', letterSpacing: -0.3, fontFamily: fonts.serif },
+  brand: { ...display, fontSize: 34, textTransform: 'uppercase', letterSpacing: -0.5, lineHeight: 34 },
   tagline: { color: colors.textDim, fontSize: 15, marginTop: spacing.xs, marginBottom: spacing.xl },
   inputWrap: {
     backgroundColor: colors.surface,
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.accent,
     paddingVertical: spacing.md,
     paddingHorizontal: spacing.lg,
-    borderRadius: 12,
+    borderRadius: 10,
     minWidth: 120,
     alignItems: 'center',
   },
@@ -249,23 +249,10 @@ const styles = StyleSheet.create({
   hint: { color: colors.textFaint, fontSize: 13, lineHeight: 19, marginTop: spacing.md },
   error: { color: colors.danger, fontSize: 13, marginTop: spacing.md },
   notice: { color: colors.textDim, fontSize: 13, marginTop: spacing.md, fontStyle: 'italic' },
-  replyCard: { backgroundColor: colors.accentSoft, borderRadius: 16, padding: spacing.lg, marginTop: spacing.xl },
-  replyLabel: {
-    color: colors.accent,
-    fontSize: 11,
-    fontWeight: '800',
-    textTransform: 'uppercase',
-    letterSpacing: 0.8,
-    marginBottom: spacing.sm,
-  },
-  replyText: { color: colors.text, fontSize: 16, lineHeight: 23 },
-  sectionLabel: {
-    color: colors.textDim,
-    fontSize: 13,
-    fontWeight: '600',
-    marginTop: spacing.xl,
-    marginBottom: spacing.md,
-  },
+  replyCard: { backgroundColor: colors.block, borderRadius: 14, padding: spacing.xl, marginTop: spacing.xl },
+  replyLabel: { ...eyebrow, color: colors.accentOnBlock, marginBottom: spacing.sm },
+  replyText: { color: colors.textOnBlock, fontSize: 17, lineHeight: 25, fontWeight: '500' },
+  sectionLabel: { ...eyebrow, color: colors.textFaint, marginTop: spacing.xl, marginBottom: spacing.md },
   learnedCard: {
     backgroundColor: colors.surface,
     borderRadius: 14,

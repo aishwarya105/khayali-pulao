@@ -4,7 +4,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { ItemCard } from '../components/ItemCard';
 import { ScheduleSheet } from '../components/ScheduleSheet';
 import { useApp } from '../store/AppContext';
-import { colors, fonts, spacing, typeMeta } from '../theme';
+import { colors, display, eyebrow, spacing, typeMeta } from '../theme';
 import { ItemType, SynthItem } from '../types';
 
 type Filter = 'all' | ItemType | 'open';
@@ -90,20 +90,20 @@ export function InboxScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   header: { paddingHorizontal: spacing.xl, paddingTop: spacing.lg, paddingBottom: spacing.sm },
-  title: { color: colors.text, fontSize: 28, fontWeight: '600', fontFamily: fonts.serif },
+  title: { ...display, fontSize: 34, textTransform: 'uppercase' },
   subtitle: { color: colors.textDim, fontSize: 14, marginTop: 2 },
   filters: { paddingHorizontal: spacing.xl, gap: spacing.sm, paddingVertical: spacing.md },
   chip: {
     paddingVertical: spacing.sm,
     paddingHorizontal: spacing.md,
-    borderRadius: 20,
+    borderRadius: 999,
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
   },
-  chipActive: { backgroundColor: colors.accent, borderColor: colors.accent },
-  chipText: { color: colors.textDim, fontSize: 13, fontWeight: '600' },
-  chipTextActive: { color: colors.accentText },
+  chipActive: { backgroundColor: colors.block, borderColor: colors.block },
+  chipText: { ...eyebrow, fontSize: 11, color: colors.textDim },
+  chipTextActive: { color: colors.textOnBlock },
   list: { padding: spacing.xl, paddingTop: spacing.sm, paddingBottom: spacing.xxl * 2 },
   empty: { padding: spacing.xxl, alignItems: 'center' },
   emptyText: { color: colors.textDim, fontSize: 15, textAlign: 'center', lineHeight: 22 },
