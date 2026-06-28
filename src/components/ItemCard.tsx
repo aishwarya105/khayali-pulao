@@ -26,7 +26,7 @@ export function ItemCard({ item, onToggle, onDelete, onSchedule }: Props) {
   const schedulable = item.type === 'todo' || item.type === 'event';
 
   return (
-    <View style={[styles.card, { borderLeftColor: meta.color }]}>
+    <View style={styles.card}>
       <View style={styles.headerRow}>
         <View style={styles.typeRow}>
           {isTodo && onToggle ? (
@@ -97,12 +97,14 @@ export function ItemCard({ item, onToggle, onDelete, onSchedule }: Props) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.surface,
-    borderRadius: 14,
-    borderLeftWidth: 3,
+    borderRadius: 3,
+    borderTopWidth: 2,
+    borderTopColor: colors.borderStrong,
+    paddingTop: spacing.md,
     padding: spacing.lg,
     marginBottom: spacing.md,
-    borderWidth: 1,
-    borderColor: colors.border,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
     ...cardShadow,
   },
   headerRow: {
@@ -119,13 +121,13 @@ const styles = StyleSheet.create({
   check: {
     width: 20,
     height: 20,
-    borderRadius: 6,
-    borderWidth: 2,
-    borderColor: colors.accent,
+    borderRadius: 2,
+    borderWidth: 1.5,
+    borderColor: colors.text,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  checkDone: { backgroundColor: colors.accent },
+  checkDone: { backgroundColor: colors.block, borderColor: colors.block },
   checkMark: { color: colors.accentText, fontSize: 13, fontWeight: '900', lineHeight: 16 },
   title: { color: colors.text, fontSize: 16, fontWeight: '700', letterSpacing: -0.2, marginBottom: 2 },
   body: { color: colors.textDim, fontSize: 14, lineHeight: 20, marginTop: 2 },
@@ -143,7 +145,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.md,
     paddingVertical: spacing.sm,
     paddingHorizontal: spacing.md,
-    borderRadius: 10,
+    borderRadius: 3,
     backgroundColor: colors.surfaceAlt,
     alignSelf: 'flex-start',
   },

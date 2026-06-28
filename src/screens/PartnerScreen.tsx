@@ -13,7 +13,7 @@ import {
 
 import { ChatBubble } from '../components/ChatBubble';
 import { useApp } from '../store/AppContext';
-import { colors, display, spacing } from '../theme';
+import { colors, display, fonts, spacing } from '../theme';
 
 const STARTERS = [
   'Help me think through something',
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     paddingTop: spacing.lg,
     paddingBottom: spacing.md,
   },
-  title: { ...display, fontSize: 34, textTransform: 'uppercase' },
+  title: { ...display, fontSize: 34 },
   subtitle: { color: colors.textDim, fontSize: 13, marginTop: 2 },
   clear: { color: colors.textFaint, fontSize: 14, fontWeight: '600' },
   thread: { padding: spacing.xl, paddingTop: spacing.sm, flexGrow: 1 },
@@ -131,13 +131,11 @@ const styles = StyleSheet.create({
   starters: { gap: spacing.sm },
   starter: {
     backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 12,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
     paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg,
   },
-  starterText: { color: colors.text, fontSize: 15 },
+  starterText: { color: colors.text, fontSize: 17, fontFamily: fonts.serif },
   typing: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingVertical: spacing.sm },
   typingText: { color: colors.textDim, fontSize: 13, fontStyle: 'italic' },
   composer: {
@@ -156,16 +154,16 @@ const styles = StyleSheet.create({
     maxHeight: 120,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.md,
-    backgroundColor: colors.bg,
-    borderRadius: 14,
+    backgroundColor: colors.surfaceAlt,
+    borderRadius: 4,
     borderWidth: 1,
     borderColor: colors.border,
   },
   send: {
     width: 44,
     height: 44,
-    borderRadius: 22,
-    backgroundColor: colors.accent,
+    borderRadius: 4,
+    backgroundColor: colors.block,
     alignItems: 'center',
     justifyContent: 'center',
   },

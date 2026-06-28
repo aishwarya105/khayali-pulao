@@ -3,7 +3,7 @@ import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { addItemToCalendar, calendarSupported } from '../calendar';
 import { formatSlot, SLOT_OPTIONS } from '../schedule';
-import { cardShadow, colors, spacing } from '../theme';
+import { cardShadow, colors, display, fonts, spacing } from '../theme';
 import { SynthItem } from '../types';
 
 interface Props {
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: spacing.lg,
   },
-  title: { color: colors.text, fontSize: 18, fontWeight: '800' },
-  subtitle: { color: colors.textDim, fontSize: 14, marginTop: 2, marginBottom: spacing.lg },
+  title: { ...display, fontSize: 24 },
+  subtitle: { color: colors.textDim, fontSize: 15, marginTop: 2, marginBottom: spacing.lg, fontFamily: fonts.serif },
   slots: { gap: spacing.sm },
   slot: {
     flexDirection: 'row',
@@ -119,12 +119,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: spacing.md,
     paddingHorizontal: spacing.lg,
-    borderRadius: 12,
-    backgroundColor: colors.bg,
+    borderRadius: 3,
+    backgroundColor: colors.surfaceAlt,
     borderWidth: 1,
     borderColor: colors.border,
   },
-  slotActive: { borderColor: colors.accent, backgroundColor: colors.accentSoft },
+  slotActive: { borderColor: colors.borderStrong, backgroundColor: colors.accentSoft },
   slotLabel: { color: colors.text, fontSize: 15, fontWeight: '600' },
   slotLabelActive: { color: colors.accent },
   slotTime: { color: colors.textFaint, fontSize: 13 },
@@ -139,18 +139,18 @@ const styles = StyleSheet.create({
   deviceBtn: {
     marginTop: spacing.lg,
     paddingVertical: spacing.md,
-    borderRadius: 12,
+    borderRadius: 3,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: colors.borderStrong,
     alignItems: 'center',
   },
   deviceBtnText: { color: colors.textDim, fontWeight: '600', fontSize: 14 },
   status: { color: colors.textDim, fontSize: 13, marginTop: spacing.md, textAlign: 'center' },
   done: {
     marginTop: spacing.lg,
-    backgroundColor: colors.accent,
+    backgroundColor: colors.block,
     paddingVertical: spacing.md,
-    borderRadius: 12,
+    borderRadius: 3,
     alignItems: 'center',
   },
   doneText: { color: colors.accentText, fontWeight: '800', fontSize: 15 },

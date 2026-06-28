@@ -1,11 +1,11 @@
 import { Suggestion, SuggestionKind } from '../types';
 
 export const suggestionMeta: Record<SuggestionKind, { label: string; emoji: string; color: string }> = {
-  book: { label: 'Book', emoji: '📖', color: '#4F8A5B' },
-  course: { label: 'Course', emoji: '🎓', color: '#C96442' },
-  video: { label: 'Video', emoji: '▶', color: '#BC4B3C' },
-  article: { label: 'Article', emoji: '📰', color: '#C0883C' },
-  practice: { label: 'Try this', emoji: '✺', color: '#7A6CB5' },
+  book: { label: 'Book', emoji: '📖', color: '#121212' },
+  course: { label: 'Course', emoji: '🎓', color: '#121212' },
+  video: { label: 'Video', emoji: '▶', color: '#121212' },
+  article: { label: 'Article', emoji: '📰', color: '#121212' },
+  practice: { label: 'Try this', emoji: '✺', color: '#121212' },
 };
 
 /** Turn a suggestion into a real, working search URL — we never trust the model

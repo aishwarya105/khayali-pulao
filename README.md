@@ -7,7 +7,8 @@ time**, suggests where to go next, helps you **make time** for what matters, and
 **keeps you honest** when you're taking on too much.
 
 Built with Expo / React Native + TypeScript, powered by Claude with a fully
-offline fallback so nothing ever hard-fails. Warm, light, editorial design.
+offline fallback so nothing ever hard-fails. New York Times–inspired design:
+serif headlines, hairline rules, black buttons, and the restrained link-blue.
 
 ## How it looks
 

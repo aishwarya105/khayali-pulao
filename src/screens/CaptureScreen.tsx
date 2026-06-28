@@ -15,7 +15,7 @@ import {
 import { ItemCard } from '../components/ItemCard';
 import { SuggestionCard } from '../components/SuggestionCard';
 import { useApp } from '../store/AppContext';
-import { cardShadow, colors, display, eyebrow, spacing, typeMeta } from '../theme';
+import { cardShadow, colors, display, eyebrow, fonts, spacing, typeMeta } from '../theme';
 import { CaptureResult, SynthItem } from '../types';
 import { useVoiceCapture } from '../voice/useVoiceCapture';
 
@@ -90,8 +90,15 @@ export function CaptureScreen() {
   return (
     <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
-        <Text style={styles.brand}>Khayali Pulao</Text>
-        <Text style={styles.tagline}>Your thought partner. Speak freely.</Text>
+        <View style={styles.masthead}>
+          <View style={styles.mastRule} />
+          <Text style={styles.dateline}>
+            {new Date().toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' })}
+          </Text>
+          <Text style={styles.brand}>Khayali Pulao</Text>
+          <Text style={styles.tagline}>YOUR THOUGHT PARTNER · SPEAK FREELY</Text>
+          <View style={styles.mastRuleThick} />
+        </View>
 
         <View style={styles.inputWrap}>
           <TextInput
@@ -204,13 +211,23 @@ export function CaptureScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   scroll: { padding: spacing.xl, paddingBottom: spacing.xxl * 2 },
-  brand: { ...display, fontSize: 34, textTransform: 'uppercase', letterSpacing: -0.5, lineHeight: 34 },
-  tagline: { color: colors.textDim, fontSize: 15, marginTop: spacing.xs, marginBottom: spacing.xl },
+  masthead: { alignItems: 'center', marginBottom: spacing.xl },
+  mastRule: { height: 1, backgroundColor: colors.borderStrong, alignSelf: 'stretch' },
+  mastRuleThick: { height: 2, backgroundColor: colors.borderStrong, alignSelf: 'stretch', marginTop: spacing.md },
+  dateline: { ...eyebrow, fontSize: 10, color: colors.textDim, marginTop: spacing.sm },
+  brand: { ...display, fontSize: 40, lineHeight: 46, marginTop: spacing.xs, textAlign: 'center' },
+  tagline: {
+    ...eyebrow,
+    fontSize: 10,
+    color: colors.textDim,
+    marginTop: spacing.sm,
+    textAlign: 'center',
+  },
   inputWrap: {
     backgroundColor: colors.surface,
-    borderRadius: 20,
+    borderRadius: 4,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: colors.borderStrong,
     padding: spacing.md,
     ...cardShadow,
   },
@@ -237,10 +254,10 @@ const styles = StyleSheet.create({
   micIcon: { fontSize: 15 },
   micLabel: { color: colors.textDim, fontSize: 13, fontWeight: '500' },
   submit: {
-    backgroundColor: colors.accent,
+    backgroundColor: colors.block,
     paddingVertical: spacing.md,
     paddingHorizontal: spacing.lg,
-    borderRadius: 10,
+    borderRadius: 3,
     minWidth: 120,
     alignItems: 'center',
   },
@@ -249,23 +266,38 @@ const styles = StyleSheet.create({
   hint: { color: colors.textFaint, fontSize: 13, lineHeight: 19, marginTop: spacing.md },
   error: { color: colors.danger, fontSize: 13, marginTop: spacing.md },
   notice: { color: colors.textDim, fontSize: 13, marginTop: spacing.md, fontStyle: 'italic' },
-  replyCard: { backgroundColor: colors.block, borderRadius: 14, padding: spacing.xl, marginTop: spacing.xl },
-  replyLabel: { ...eyebrow, color: colors.accentOnBlock, marginBottom: spacing.sm },
-  replyText: { color: colors.textOnBlock, fontSize: 17, lineHeight: 25, fontWeight: '500' },
-  sectionLabel: { ...eyebrow, color: colors.textFaint, marginTop: spacing.xl, marginBottom: spacing.md },
-  learnedCard: {
+  replyCard: {
     backgroundColor: colors.surface,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: colors.border,
+    borderLeftWidth: 3,
+    borderLeftColor: colors.borderStrong,
+    paddingLeft: spacing.lg,
+    paddingVertical: spacing.xs,
+    marginTop: spacing.xl,
+  },
+  replyLabel: { ...eyebrow, color: colors.text, marginBottom: spacing.sm },
+  replyText: { color: colors.text, fontSize: 21, lineHeight: 30, fontFamily: fonts.serif },
+  sectionLabel: {
+    ...eyebrow,
+    color: colors.text,
+    marginTop: spacing.xl,
+    marginBottom: spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.borderStrong,
+    paddingBottom: spacing.sm,
+  },
+  learnedCard: {
+    backgroundColor: colors.surfaceAlt,
+    borderRadius: 3,
+    borderLeftWidth: 3,
+    borderLeftColor: colors.borderStrong,
     padding: spacing.lg,
     marginTop: spacing.xl,
   },
-  learnedLabel: { color: colors.success, fontSize: 13, fontWeight: '700', marginBottom: spacing.sm },
+  learnedLabel: { ...eyebrow, color: colors.text, marginBottom: spacing.sm },
   learnedItem: { color: colors.textDim, fontSize: 14, lineHeight: 21, marginTop: spacing.xs },
-  learnedCat: { color: colors.text, fontWeight: '600' },
+  learnedCat: { color: colors.text, fontWeight: '700' },
   savedHint: { color: colors.textFaint, fontSize: 12, fontStyle: 'italic', marginBottom: spacing.md },
   empty: { marginTop: spacing.xxl, alignItems: 'center', paddingHorizontal: spacing.md },
-  emptyTitle: { color: colors.text, fontSize: 17, fontWeight: '700', marginBottom: spacing.sm },
+  emptyTitle: { ...display, fontSize: 20, marginBottom: spacing.sm },
   emptyBody: { color: colors.textDim, fontSize: 14, lineHeight: 21, textAlign: 'center' },
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { searchUrl, suggestionMeta } from '../ai/suggestions';
-import { cardShadow, colors, spacing } from '../theme';
+import { cardShadow, colors, display, fonts, spacing } from '../theme';
 import { Suggestion, SuggestionStatus } from '../types';
 
 interface Props {
@@ -20,7 +20,7 @@ export function SuggestionCard({ suggestion, onSetStatus, compact }: Props) {
   }
 
   return (
-    <View style={[styles.card, { borderColor: meta.color + '55' }]}>
+    <View style={styles.card}>
       <View style={styles.headerRow}>
         <Text style={[styles.kind, { color: meta.color }]}>
           {meta.emoji} {meta.label}
@@ -42,7 +42,7 @@ export function SuggestionCard({ suggestion, onSetStatus, compact }: Props) {
       {!compact ? <Text style={styles.reason}>{suggestion.reason}</Text> : null}
 
       <Pressable style={styles.open} onPress={open}>
-        <Text style={[styles.openText, { color: meta.color }]}>Find it ↗</Text>
+        <Text style={styles.openText}>Find it ↗</Text>
       </Pressable>
     </View>
   );
@@ -51,9 +51,13 @@ export function SuggestionCard({ suggestion, onSetStatus, compact }: Props) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.surface,
-    borderRadius: 14,
-    borderWidth: 1,
+    borderRadius: 3,
+    borderTopWidth: 2,
+    borderTopColor: colors.borderStrong,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
     padding: spacing.lg,
+    paddingTop: spacing.md,
     marginBottom: spacing.md,
     ...cardShadow,
   },
@@ -62,9 +66,9 @@ const styles = StyleSheet.create({
   actions: { flexDirection: 'row', gap: spacing.md, alignItems: 'center' },
   action: { color: colors.textFaint, fontSize: 16, fontWeight: '700' },
   actionActive: { color: colors.warning },
-  title: { color: colors.text, fontSize: 16, fontWeight: '700', marginTop: spacing.sm },
-  creator: { color: colors.textDim, fontSize: 13, marginTop: 2 },
+  title: { ...display, fontSize: 19, marginTop: spacing.sm, lineHeight: 24 },
+  creator: { color: colors.textDim, fontSize: 13, marginTop: 2, fontStyle: 'italic', fontFamily: fonts.serif },
   reason: { color: colors.textDim, fontSize: 14, lineHeight: 20, marginTop: spacing.sm },
   open: { marginTop: spacing.md, alignSelf: 'flex-start' },
-  openText: { fontSize: 14, fontWeight: '700' },
+  openText: { fontSize: 13, fontWeight: '700', color: colors.accent, letterSpacing: 0.3 },
 });

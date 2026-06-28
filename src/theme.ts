@@ -2,50 +2,57 @@ import { Platform, TextStyle } from 'react-native';
 
 import { ItemType } from './types';
 
-// Bold editorial: a bright paper canvas, heavy high-contrast ink, one electric
-// accent, flat surfaces with crisp hairlines and confident color blocks. Big,
-// tight display type drives the hierarchy — magazine-forward, not soft.
+// New York Times newspaper aesthetic: a clean white page, near-black serif
+// headlines, Franklin-Gothic-style uppercase kickers, thin hairline rules, and
+// the restrained NYT link-blue used sparingly. Buttons are black; surfaces are
+// flat and separated by rules, not shadows.
 
 export const colors = {
-  bg: '#FAF8F2', // bright warm paper
+  bg: '#FFFFFF',
   surface: '#FFFFFF',
-  surfaceAlt: '#F1EEE4', // inputs, chips
-  block: '#15140F', // ink color-block (hero / emphasis fills)
-  border: '#E4E0D4', // hairline
-  borderStrong: '#15140F', // editorial rule / emphasized border
-  text: '#15140F', // near-black ink
-  textOnBlock: '#FAF8F2', // text on ink blocks
-  textDim: '#5C584E',
-  textFaint: '#9A9486',
-  accent: '#2F43E6', // electric cobalt
+  surfaceAlt: '#F7F7F7', // input / chip fill
+  block: '#121212', // black buttons / emphasis
+  border: '#E2E2E2', // light hairline
+  borderStrong: '#121212', // black editorial rule
+  text: '#121212', // near-black ink
+  textOnBlock: '#FFFFFF',
+  textDim: '#5A5A5A',
+  textFaint: '#9A9A9A',
+  accent: '#326891', // NYT link blue
   accentText: '#FFFFFF',
-  accentOnBlock: '#AEB7FF', // lighter cobalt for use on ink blocks
-  accentSoft: '#E4E7FB', // tinted accent surface
-  danger: '#D11A2A',
-  success: '#0E8A4F',
-  warning: '#C97A00',
+  accentOnBlock: '#9DB7CC',
+  accentSoft: '#EAF0F4',
+  danger: '#A81817', // NYT-ish serious red
+  success: '#1A7F4B',
+  warning: '#9E6B1F',
 };
 
-// Heavy, tight display type for headlines (system grotesque, max weight).
+const SERIF = Platform.select({ ios: 'Georgia', android: 'serif', default: 'Georgia' }) as string;
+
+export const fonts = { serif: SERIF };
+
+// Serif headline type — the newspaper voice.
 export const display: TextStyle = {
-  fontWeight: '900',
-  letterSpacing: -0.8,
+  fontFamily: SERIF,
+  fontWeight: '700',
+  letterSpacing: -0.2,
   color: colors.text,
 };
 
-// Wide-tracked uppercase eyebrow/label.
+// Franklin-Gothic-style kicker: uppercase, tracked, sans.
 export const eyebrow: TextStyle = {
-  fontWeight: '800',
+  fontWeight: '700',
   fontSize: 11,
-  letterSpacing: 1.4,
+  letterSpacing: 1.2,
   textTransform: 'uppercase',
 };
 
+// Monochrome kickers — NYT differentiates sections by the word, not color.
 export const typeMeta: Record<ItemType, { label: string; emoji: string; color: string }> = {
-  todo: { label: 'To-do', emoji: '○', color: '#2F43E6' },
-  event: { label: 'Schedule', emoji: '◷', color: '#C97A00' },
-  insight: { label: 'Insight', emoji: '✦', color: '#7A3FB0' },
-  note: { label: 'Note', emoji: '•', color: '#0E8A4F' },
+  todo: { label: 'To-do', emoji: '○', color: '#121212' },
+  event: { label: 'Schedule', emoji: '◷', color: '#121212' },
+  insight: { label: 'Insight', emoji: '✦', color: '#121212' },
+  note: { label: 'Note', emoji: '•', color: '#121212' },
 };
 
 export const spacing = {
@@ -58,15 +65,10 @@ export const spacing = {
 };
 
 export const radius = {
-  sm: 6,
-  md: 10,
-  lg: 14,
+  sm: 2,
+  md: 3,
+  lg: 4,
 };
 
-// Editorial cards are flat — emphasis comes from borders and ink blocks, not
-// soft shadows. A whisper of lift keeps them off the canvas.
-export const cardShadow = Platform.select({
-  ios: { shadowColor: '#15140F', shadowOpacity: 0.05, shadowRadius: 6, shadowOffset: { width: 0, height: 2 } },
-  android: { elevation: 1 },
-  default: { shadowColor: '#15140F', shadowOpacity: 0.05, shadowRadius: 6, shadowOffset: { width: 0, height: 2 } },
-}) as object;
+// Newspaper surfaces are flat — rules and hairlines carry the structure.
+export const cardShadow = {} as object;

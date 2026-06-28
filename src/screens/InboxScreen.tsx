@@ -90,13 +90,13 @@ export function InboxScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   header: { paddingHorizontal: spacing.xl, paddingTop: spacing.lg, paddingBottom: spacing.sm },
-  title: { ...display, fontSize: 34, textTransform: 'uppercase' },
+  title: { ...display, fontSize: 34 },
   subtitle: { color: colors.textDim, fontSize: 14, marginTop: 2 },
   filters: { paddingHorizontal: spacing.xl, gap: spacing.sm, paddingVertical: spacing.md },
   chip: {
     paddingVertical: spacing.sm,
     paddingHorizontal: spacing.md,
-    borderRadius: 999,
+    borderRadius: 3,
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,

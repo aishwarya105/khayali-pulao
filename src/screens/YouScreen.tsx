@@ -4,7 +4,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SuggestionCard } from '../components/SuggestionCard';
 import { useApp } from '../store/AppContext';
 import { SettingsScreen } from './SettingsScreen';
-import { colors, display, eyebrow, spacing } from '../theme';
+import { colors, display, eyebrow, fonts, spacing } from '../theme';
 import { FactCategory } from '../types';
 
 type Pane = 'about' | 'suggestions' | 'settings';
@@ -122,19 +122,19 @@ export function YouScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   header: { paddingHorizontal: spacing.xl, paddingTop: spacing.lg, paddingBottom: spacing.sm },
-  title: { ...display, fontSize: 34, textTransform: 'uppercase' },
+  title: { ...display, fontSize: 34 },
   subtitle: { color: colors.textDim, fontSize: 14, marginTop: 2 },
   segment: {
     flexDirection: 'row',
     marginHorizontal: spacing.xl,
     marginVertical: spacing.md,
     backgroundColor: colors.surface,
-    borderRadius: 12,
+    borderRadius: 3,
     padding: 4,
     borderWidth: 1,
     borderColor: colors.border,
   },
-  segBtn: { flex: 1, paddingVertical: spacing.sm, borderRadius: 8, alignItems: 'center' },
+  segBtn: { flex: 1, paddingVertical: spacing.sm, borderRadius: 2, alignItems: 'center' },
   segBtnActive: { backgroundColor: colors.block },
   segText: { ...eyebrow, fontSize: 11, color: colors.textDim },
   segTextActive: { color: colors.textOnBlock },
@@ -146,13 +146,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: colors.surface,
-    borderRadius: 12,
-    padding: spacing.lg,
-    marginBottom: spacing.sm,
-    borderWidth: 1,
-    borderColor: colors.border,
+    paddingVertical: spacing.md,
+    marginBottom: 0,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
   },
-  factText: { color: colors.text, fontSize: 15, lineHeight: 21, flex: 1 },
+  factText: { color: colors.text, fontSize: 17, lineHeight: 24, flex: 1, fontFamily: fonts.serif },
   factMeta: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, marginLeft: spacing.md },
   evidence: { color: colors.accent, fontSize: 12, fontWeight: '700' },
   factDelete: { color: colors.textFaint, fontSize: 14 },
