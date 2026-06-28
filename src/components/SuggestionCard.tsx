@@ -2,7 +2,7 @@ import React from 'react';
 import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { searchUrl, suggestionMeta } from '../ai/suggestions';
-import { colors, spacing } from '../theme';
+import { cardShadow, colors, spacing } from '../theme';
 import { Suggestion, SuggestionStatus } from '../types';
 
 interface Props {
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: spacing.lg,
     marginBottom: spacing.md,
+    ...cardShadow,
   },
   headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   kind: { fontSize: 12, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 0.5 },

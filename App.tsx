@@ -13,9 +13,9 @@ import { colors, spacing } from './src/theme';
 type Tab = 'capture' | 'today' | 'inbox' | 'partner' | 'you';
 
 const TABS: { key: Tab; label: string; icon: string }[] = [
-  { key: 'capture', label: 'Capture', icon: '🎙' },
+  { key: 'capture', label: 'Capture', icon: '✎' },
   { key: 'today', label: 'Today', icon: '◷' },
-  { key: 'inbox', label: 'Inbox', icon: '✦' },
+  { key: 'inbox', label: 'Inbox', icon: '❖' },
   { key: 'partner', label: 'Partner', icon: '✺' },
   { key: 'you', label: 'You', icon: '☺' },
 ];
@@ -61,7 +61,7 @@ export default function App() {
   return (
     <AppProvider>
       <SafeAreaView style={styles.safe}>
-        <StatusBar style="light" />
+        <StatusBar style="dark" />
         <Root />
       </SafeAreaView>
     </AppProvider>
@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     paddingTop: spacing.sm,
     paddingBottom: spacing.lg,
   },
-  tab: { flex: 1, alignItems: 'center', gap: 2 },
-  tabIcon: { fontSize: 18, opacity: 0.6, color: colors.textFaint },
+  tab: { flex: 1, alignItems: 'center', gap: 3 },
+  tabIcon: { fontSize: 18, color: colors.textFaint },
   tabLabel: { color: colors.textFaint, fontSize: 11, fontWeight: '600' },
-  tabActive: { color: colors.accent, opacity: 1 },
+  tabActive: { color: colors.accent },
 });

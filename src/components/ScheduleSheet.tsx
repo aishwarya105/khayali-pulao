@@ -3,7 +3,7 @@ import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { addItemToCalendar, calendarSupported } from '../calendar';
 import { formatSlot, SLOT_OPTIONS } from '../schedule';
-import { colors, spacing } from '../theme';
+import { cardShadow, colors, spacing } from '../theme';
 import { SynthItem } from '../types';
 
 interface Props {
@@ -93,13 +93,14 @@ export function ScheduleSheet({ item, onClose, onSchedule }: Props) {
 }
 
 const styles = StyleSheet.create({
-  backdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.55)', justifyContent: 'flex-end' },
+  backdrop: { flex: 1, backgroundColor: 'rgba(38,30,22,0.35)', justifyContent: 'flex-end' },
   sheet: {
     backgroundColor: colors.surface,
     borderTopLeftRadius: 22,
     borderTopRightRadius: 22,
     padding: spacing.xl,
     paddingBottom: spacing.xxl,
+    ...cardShadow,
   },
   handle: {
     width: 40,
@@ -152,5 +153,5 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
   },
-  doneText: { color: colors.bg, fontWeight: '800', fontSize: 15 },
+  doneText: { color: colors.accentText, fontWeight: '800', fontSize: 15 },
 });

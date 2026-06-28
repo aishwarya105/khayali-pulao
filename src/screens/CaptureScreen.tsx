@@ -15,7 +15,7 @@ import {
 import { ItemCard } from '../components/ItemCard';
 import { SuggestionCard } from '../components/SuggestionCard';
 import { useApp } from '../store/AppContext';
-import { colors, spacing, typeMeta } from '../theme';
+import { cardShadow, colors, fonts, spacing, typeMeta } from '../theme';
 import { CaptureResult, SynthItem } from '../types';
 import { useVoiceCapture } from '../voice/useVoiceCapture';
 
@@ -121,16 +121,18 @@ export function CaptureScreen() {
               disabled={busy || !text.trim()}
               style={[styles.submit, (busy || !text.trim()) && styles.submitDisabled]}
             >
-              {busy ? <ActivityIndicator color={colors.bg} /> : <Text style={styles.submitText}>Synthesize ↗</Text>}
+              {busy ? <ActivityIndicator color={colors.accentText} /> : <Text style={styles.submitText}>Synthesize ↗</Text>}
             </Pressable>
           </View>
         </View>
 
         {!voice.supported ? (
           <Text style={styles.hint}>
-            Voice-to-text runs in the browser build. On a phone, type your thought — everything else
-            works the same.
+            Voice needs the full app build (Expo Go can’t reach on-device speech). Type your thought
+            for now — everything else works the same.
           </Text>
+        ) : voice.backend === 'native' ? (
+          <Text style={styles.hint}>On-device speech recognition — nothing leaves your phone.</Text>
         ) : null}
         {voice.error ? <Text style={styles.error}>Mic: {voice.error}</Text> : null}
         {notice ? <Text style={styles.notice}>{notice}</Text> : null}
@@ -202,14 +204,15 @@ export function CaptureScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   scroll: { padding: spacing.xl, paddingBottom: spacing.xxl * 2 },
-  brand: { color: colors.text, fontSize: 26, fontWeight: '800', letterSpacing: -0.5 },
+  brand: { color: colors.text, fontSize: 30, fontWeight: '600', letterSpacing: -0.3, fontFamily: fonts.serif },
   tagline: { color: colors.textDim, fontSize: 15, marginTop: spacing.xs, marginBottom: spacing.xl },
   inputWrap: {
     backgroundColor: colors.surface,
-    borderRadius: 18,
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: colors.border,
     padding: spacing.md,
+    ...cardShadow,
   },
   input: { color: colors.text, fontSize: 17, lineHeight: 24, minHeight: 130, padding: spacing.sm },
   inputBar: {
@@ -242,7 +245,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   submitDisabled: { opacity: 0.4 },
-  submitText: { color: colors.bg, fontWeight: '800', fontSize: 15 },
+  submitText: { color: colors.accentText, fontWeight: '800', fontSize: 15 },
   hint: { color: colors.textFaint, fontSize: 13, lineHeight: 19, marginTop: spacing.md },
   error: { color: colors.danger, fontSize: 13, marginTop: spacing.md },
   notice: { color: colors.textDim, fontSize: 13, marginTop: spacing.md, fontStyle: 'italic' },

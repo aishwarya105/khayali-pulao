@@ -4,19 +4,24 @@
     "slug": "khayali-pulao",
     "version": "0.1.0",
     "orientation": "portrait",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "scheme": "khayalipulao",
     "splash": {
       "resizeMode": "contain",
-      "backgroundColor": "#0E1116"
+      "backgroundColor": "#F7F4EE"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.khayalipulao.app"
+      "bundleIdentifier": "com.khayalipulao.app",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Khayali Pulao uses your microphone to capture spoken thoughts.",
+        "NSSpeechRecognitionUsageDescription": "Khayali Pulao transcribes your speech on-device so you can think out loud."
+      }
     },
     "android": {
-      "package": "com.khayalipulao.app"
+      "package": "com.khayalipulao.app",
+      "permissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
       "bundler": "metro"

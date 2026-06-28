@@ -13,7 +13,7 @@ import {
 
 import { ChatBubble } from '../components/ChatBubble';
 import { useApp } from '../store/AppContext';
-import { colors, spacing } from '../theme';
+import { colors, fonts, spacing } from '../theme';
 
 const STARTERS = [
   'Help me think through something',
@@ -121,12 +121,12 @@ const styles = StyleSheet.create({
     paddingTop: spacing.lg,
     paddingBottom: spacing.md,
   },
-  title: { color: colors.text, fontSize: 24, fontWeight: '800' },
+  title: { color: colors.text, fontSize: 28, fontWeight: '600', fontFamily: fonts.serif },
   subtitle: { color: colors.textDim, fontSize: 13, marginTop: 2 },
   clear: { color: colors.textFaint, fontSize: 14, fontWeight: '600' },
   thread: { padding: spacing.xl, paddingTop: spacing.sm, flexGrow: 1 },
   intro: { paddingTop: spacing.xl },
-  introTitle: { color: colors.text, fontSize: 19, fontWeight: '700', marginBottom: spacing.sm },
+  introTitle: { color: colors.text, fontSize: 21, fontWeight: '600', marginBottom: spacing.sm, fontFamily: fonts.serif },
   introBody: { color: colors.textDim, fontSize: 15, lineHeight: 22, marginBottom: spacing.xl },
   starters: { gap: spacing.sm },
   starter: {
@@ -170,5 +170,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   sendDisabled: { opacity: 0.4 },
-  sendText: { color: colors.bg, fontSize: 22, fontWeight: '800', lineHeight: 24 },
+  sendText: { color: colors.accentText, fontSize: 22, fontWeight: '800', lineHeight: 24 },
 });

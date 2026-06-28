@@ -5,7 +5,7 @@ import { ItemCard } from '../components/ItemCard';
 import { ScheduleSheet } from '../components/ScheduleSheet';
 import { formatSlot, isToday } from '../schedule';
 import { useApp } from '../store/AppContext';
-import { colors, spacing } from '../theme';
+import { cardShadow, colors, fonts, spacing } from '../theme';
 import { LoadLevel, SynthItem } from '../types';
 
 const loadMeta: Record<LoadLevel, { label: string; color: string }> = {
@@ -51,7 +51,7 @@ export function TodayScreen() {
               disabled={reviewPending}
             >
               {reviewPending ? (
-                <ActivityIndicator color={colors.bg} size="small" />
+                <ActivityIndicator color={colors.accentText} size="small" />
               ) : (
                 <Text style={styles.coachBtnText}>{loadReview ? 'Refresh' : 'Check my load'}</Text>
               )}
@@ -155,7 +155,7 @@ function getGreeting(): string {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   scroll: { padding: spacing.xl, paddingBottom: spacing.xxl * 2 },
-  greeting: { color: colors.text, fontSize: 26, fontWeight: '800', letterSpacing: -0.5 },
+  greeting: { color: colors.text, fontSize: 30, fontWeight: '600', letterSpacing: -0.3, fontFamily: fonts.serif },
   date: { color: colors.textDim, fontSize: 15, marginTop: 2, marginBottom: spacing.xl },
   coachCard: {
     backgroundColor: colors.surface,
@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
     padding: spacing.lg,
+    ...cardShadow,
   },
   coachHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   coachTitle: { color: colors.text, fontSize: 17, fontWeight: '700' },
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
     minWidth: 110,
     alignItems: 'center',
   },
-  coachBtnText: { color: colors.bg, fontWeight: '700', fontSize: 13 },
+  coachBtnText: { color: colors.accentText, fontWeight: '700', fontSize: 13 },
   coachEmpty: { color: colors.textDim, fontSize: 14, lineHeight: 21, marginTop: spacing.md },
   loadPill: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginTop: spacing.md },
   loadDot: { width: 9, height: 9, borderRadius: 5 },

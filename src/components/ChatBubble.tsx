@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
   mine: { backgroundColor: colors.accent, borderBottomRightRadius: 4 },
   theirs: { backgroundColor: colors.surface, borderBottomLeftRadius: 4, borderWidth: 1, borderColor: colors.border },
   text: { fontSize: 15, lineHeight: 22 },
-  textMine: { color: colors.bg, fontWeight: '500' },
+  textMine: { color: colors.accentText, fontWeight: '500' },
   textTheirs: { color: colors.text },
 });

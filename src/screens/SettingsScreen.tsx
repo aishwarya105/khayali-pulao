@@ -12,7 +12,7 @@ import {
 
 import { DEFAULT_MODEL } from '../settings';
 import { useApp } from '../store/AppContext';
-import { colors, spacing } from '../theme';
+import { colors, fonts, spacing } from '../theme';
 
 const MODEL_OPTIONS = [
   { id: 'claude-sonnet-4-6', label: 'Sonnet 4.6 — balanced (recommended)' },
@@ -137,7 +137,7 @@ export function SettingsScreen({ embedded = false }: { embedded?: boolean } = {}
 
 const styles = StyleSheet.create({
   scroll: { padding: spacing.xl, paddingBottom: spacing.xxl * 2 },
-  title: { color: colors.text, fontSize: 24, fontWeight: '800', marginBottom: spacing.lg },
+  title: { color: colors.text, fontSize: 28, fontWeight: '600', marginBottom: spacing.lg, fontFamily: fonts.serif },
   section: {
     backgroundColor: colors.surface,
     borderRadius: 16,
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   btnDisabled: { opacity: 0.4 },
-  btnText: { color: colors.bg, fontWeight: '700' },
+  btnText: { color: colors.accentText, fontWeight: '700' },
   btnGhost: {
     paddingVertical: spacing.md,
     paddingHorizontal: spacing.lg,

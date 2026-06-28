@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { formatSlot, isPast } from '../schedule';
-import { colors, spacing, typeMeta } from '../theme';
+import { cardShadow, colors, spacing, typeMeta } from '../theme';
 import { SynthItem } from '../types';
 import { relativeTime } from '../util';
 
@@ -101,6 +101,9 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     padding: spacing.lg,
     marginBottom: spacing.md,
+    borderWidth: 1,
+    borderColor: colors.border,
+    ...cardShadow,
   },
   headerRow: {
     flexDirection: 'row',
@@ -123,7 +126,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   checkDone: { backgroundColor: colors.accent },
-  checkMark: { color: colors.bg, fontSize: 13, fontWeight: '900', lineHeight: 16 },
+  checkMark: { color: colors.accentText, fontSize: 13, fontWeight: '900', lineHeight: 16 },
   title: { color: colors.text, fontSize: 16, fontWeight: '600', marginBottom: 2 },
   body: { color: colors.textDim, fontSize: 14, lineHeight: 20, marginTop: 2 },
   struck: { textDecorationLine: 'line-through', color: colors.textFaint },

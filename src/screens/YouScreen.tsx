@@ -4,7 +4,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SuggestionCard } from '../components/SuggestionCard';
 import { useApp } from '../store/AppContext';
 import { SettingsScreen } from './SettingsScreen';
-import { colors, spacing } from '../theme';
+import { colors, fonts, spacing } from '../theme';
 import { FactCategory } from '../types';
 
 type Pane = 'about' | 'suggestions' | 'settings';
@@ -122,7 +122,7 @@ export function YouScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   header: { paddingHorizontal: spacing.xl, paddingTop: spacing.lg, paddingBottom: spacing.sm },
-  title: { color: colors.text, fontSize: 24, fontWeight: '800' },
+  title: { color: colors.text, fontSize: 28, fontWeight: '600', fontFamily: fonts.serif },
   subtitle: { color: colors.textDim, fontSize: 14, marginTop: 2 },
   segment: {
     flexDirection: 'row',

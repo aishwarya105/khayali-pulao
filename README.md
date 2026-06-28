@@ -7,7 +7,20 @@ time**, suggests where to go next, helps you **make time** for what matters, and
 **keeps you honest** when you're taking on too much.
 
 Built with Expo / React Native + TypeScript, powered by Claude with a fully
-offline fallback so nothing ever hard-fails.
+offline fallback so nothing ever hard-fails. Warm, light, editorial design.
+
+## How it looks
+
+| Capture | Today (load check) | Library |
+| --- | --- | --- |
+| ![Capture](docs/screenshots/02-capture-results.png) | ![Today](docs/screenshots/03-today.png) | ![Library](docs/screenshots/07-you-library.png) |
+
+| Partner | Schedule | About you |
+| --- | --- | --- |
+| ![Partner](docs/screenshots/05-partner-chat.png) | ![Schedule](docs/screenshots/08-schedule-sheet.png) | ![About you](docs/screenshots/06-you-about.png) |
+
+_(Screenshots are the on-device fallback engine, with no API key — the Claude-backed
+path produces richer titles, replies, and suggestions.)_
 
 ## What it does
 
@@ -74,12 +87,23 @@ Add a Claude API key under **You → Settings** to switch from on-device synthes
 to the full Claude-powered experience. Default model is `claude-sonnet-4-6`;
 Opus 4.8 and Haiku 4.5 are also selectable.
 
-> **Voice:** live speech-to-text uses the browser's Web Speech API, so it works in
-> the web build out of the box. On a native device, on-device STT needs a custom
-> dev build — until then, type your thought; everything else is identical.
+> **Voice:** speech-to-text is real on both platforms — on native it uses
+> **on-device** recognition (Apple Speech / Android `SpeechRecognizer`) via
+> `@react-native-voice/voice`, and on web it uses the Web Speech API. Native
+> recognition needs a **dev build** (`npx expo run:ios` / `run:android` or an EAS
+> build) — it is **not** available in Expo Go, where the app falls back to typing.
 >
 > **Device calendar:** export uses `expo-calendar`, available on native builds; on
 > web it degrades to the in-app agenda.
+
+### Trying native voice
+
+```bash
+npx expo run:ios       # or: npx expo run:android  (needs Xcode / Android SDK)
+```
+
+This produces a dev build with the microphone + speech-recognition entitlements
+declared in `app.json`, so the mic button does live on-device transcription.
 
 ## Project layout
 
@@ -101,7 +125,7 @@ src/
     coach.ts                 Accountability / load review
     suggestions.ts           Suggestion → real search-link mapping
     local.ts                 On-device fallbacks for all of the above
-  voice/useVoiceCapture.ts   Web Speech API hook (graceful native degrade)
+  voice/useVoiceCapture.ts   Speech-to-text: native on-device + web, graceful degrade
   components/                ItemCard, SuggestionCard, ChatBubble, ScheduleSheet
   screens/                   Capture, Today, Inbox, Partner, You, Settings
 ```
